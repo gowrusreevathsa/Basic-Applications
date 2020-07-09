@@ -20,6 +20,12 @@ def store(argv):
     data = ET.parse(dumpPath)
     root = data.getroot()
 
+    for ele in root.findall('File'):
+        if ele.get('Path') == argv[2]:
+            ele.set('Hash', hash256)
+            data.write(dumpPath)
+            return
+
     FileItem = ET.SubElement(root, 'File')
     FileItem.set('Path', argv[2])
     HashItem = ET.SubElement(FileItem, 'Hash')
