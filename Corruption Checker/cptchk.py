@@ -56,22 +56,26 @@ def check(argv):
     if flag == False:
         print("Hash not found")
         return
-
-
-    # item = ET.SubElement(data, 'File')
-    # pathF = ET.SubElement(item, 'Path')
-    # hashF = ET.SubElement(item, 'Hash')
-    # pathF.text = argv[2]
-    # hashF.text = hash256
-    # f = open(dumpPath, 'wb')
-    # f.write(ET.tostring(data))
     
+def helpText():
+    print("\n**************************************\n")
+    print("Welcome to Corruption Checker")
+    print("The List of commands are:")
+    print("\tstore  -To store the hash of a file")
+    print("\tcheck  -To check if the file is corrupted")
+    print("\tfile  -To specify that the command should run on a file")
+    print('Example: cptchk store file "<Path to the file>"')
+    print("\n**************************************\n")
 
 def main(argv):
-    if argv[0] == 'store':
+    if len(argv) == 0:
+        helpText()
+    elif argv[0] == 'store':
         store(argv)
     elif argv[0] == 'check':
         check(argv)
+    else:
+        helpText()
 
 if __name__ == "__main__":
     main(sys.argv[1:])
